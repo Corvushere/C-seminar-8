@@ -77,20 +77,21 @@ array[i,k] = tmp;
 Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
 */
 
-
+/*
 Console.WriteLine("Введите количество строк и столбцов");
 int row = Convert.ToInt32(Console.ReadLine());
 int col = row;
 int [,] array = new int[row,col];
+int [] sum = new int[row];
 
 
 FillArray(array);
-Console.WriteLine("Начальный массив");
+Console.WriteLine("Заданный массив");
 PrintArray(array);
-SortRowArray(array);
-Console.WriteLine("Отсортированный по убыванию массив");
-PrintArray(array);
-//PrintSum(sum);
+SumRowArray(array);
+MaxSumRowArray(sum);
+
+
 
 
 void FillArray(int[,] array)
@@ -112,36 +113,29 @@ Console.WriteLine();
 
 
 
-void SortRowArray(int[,] array)
-{ int [] sum = new int[row];
+void SumRowArray(int[,] array)
+{ 
 int s =0;
 for (int i = 0; i < col; i++)
 { s = 0;
 for (int j = 0; j < row; j++)
 {
-
 s += array [i,j];
-
-   
 sum[i] = s;
-
-Console.WriteLine("sum" + sum[i]);
-Console.WriteLine("j" + i);
-Console.WriteLine("s" + s);
-}
-}
-for (int i=0;i<row;i++)
-{
-Console.Write("sumi" + sum[i]);
-}
-Console.WriteLine();
+}}
 }
 
-/*
-void PrintSum(int[] sum)
-{
-for (int i=0;i<row;i++)
-{
-Console.Write($"{sum[i],3} \t");
+
+void MaxSumRowArray(int[] sum)
+{ int  max = 0;
+for (int i = 0; i < row; i++)
+{ if (max < sum[i]){
+max = sum[i];
+}}
+for (int i=0;i<array.GetLength(0);i++)
+{Console.Write($"{sum[i],3} \t");}
 Console.WriteLine();
-Console.WriteLine();}}*/
+Console.WriteLine(max);}
+*/
+
+
