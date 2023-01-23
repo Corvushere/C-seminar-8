@@ -127,16 +127,14 @@ sum[i] = s;
 
 
 void MinSumRowArray(int[] sum)
-{ int  min = sum[1], r = 1;
-for (int i = 1; i < row; i++)
-{ if (min < sum[i]){
+{ int  min = sum[0], r = 1;
+for (int i = 0; i < row; i++)
+{ if (min > sum[i]){
 min = sum[i]; r = (i+1);
 }}
-for (int i=0;i<array.GetLength(0);i++)
-{Console.Write($"{sum[i],3} \t");}
 Console.WriteLine();
-Console.WriteLine(r);
-Console.WriteLine(min);}
+Console.WriteLine("Минимальная ссумма элементов строки " + min + " и находится в " + r + " строке.");}
+
 
 
 
