@@ -243,54 +243,47 @@ PrintArray(array);
 
 int[,,] GetArray(int[] sizes, int min, int max)
 {
-    int[,,] result = new int[sizes[0], sizes[1], sizes[2]];
-    for (int i = 0; i < result.GetLength(0); i++)
-    {
-        for (int j = 0; j < result.GetLength(1); j++)
-        {
-            int k = 0;
-            while (k < result.GetLength(2))
-            {
-                int element = new Random().Next(min, max + 1);
-                if (FindElement(result, element)) continue;
-                result[i, j, k] = element;
-                k++;
-            }
-        }
-    }
-    return result;
-}
-
-
-        bool FindElement(int[,,] array, int el)
+int[,,] result = new int[sizes[0], sizes[1], sizes[2]];
+for (int i = 0; i < result.GetLength(0); i++)
 {
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-        for (int j = 0; j < array.GetLength(1); j++)
-        {
-            for (int k = 0; k < array.GetLength(2); k++)
-            {
-                if (array[i, j, k] == el) return true;
-            }
-        }
-    }
-    return false;
+for (int j = 0; j < result.GetLength(1); j++)
+{
+int k = 0;
+while (k < result.GetLength(2))
+{
+int element = new Random().Next(min, max + 1);
+if (FindElement(result, element)) continue;
+result[i, j, k] = element;
+k++;
+}}}
+return result;
+}
+bool FindElement(int[,,] array, int el)
+{
+for (int i = 0; i < array.GetLength(0); i++)
+{
+for (int j = 0; j < array.GetLength(1); j++)
+{
+for (int k = 0; k < array.GetLength(2); k++)
+{
+if (array[i, j, k] == el) return true;
+}}}
+return false;
 }
 void PrintArray(int[,,] array)
 {
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-        for (int j = 0; j < array.GetLength(1); j++)
-        {
-            for (int k = 0; k < array.GetLength(2); k++)
-            {
-                Console.Write($"{array[i, j, k]} ({i},{j},{k}) ");
-            }
-            Console.WriteLine();
-
-            Console.ReadKey();
-        }
-    }
+for (int i = 0; i < array.GetLength(0); i++)
+{
+for (int j = 0; j < array.GetLength(1); j++)
+{
+for (int k = 0; k < array.GetLength(2); k++)
+{
+Console.Write($"{array[i, j, k]} ({i},{j},{k}) ");
+}
+Console.WriteLine();
+Console.ReadKey();
+}
+}
 }
 */
 
@@ -298,119 +291,49 @@ void PrintArray(int[,,] array)
 Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
 Например, на выходе получается вот такой массив:
 */
+
+
 using System;
 
-class Program {
-  public static void Main (string[] args) {
-    /*Задача 62. Заполните спирально массив 4 на 4.
-Например, на выходе получается вот такой массив:
-1 2 3 4
-12 13 14 5
-11 16 15 6
-10 9 8 7*/
-Console.WriteLine($"Введите размер матрицы: ");
-    int s = int.Parse(Console.ReadLine());
-    int[,] arr = GetArray(s);
-    PrintArray(arr);
-
-
-    int[,] GetArray(int size)
+class Spiral
+{
+static void DisplayArray(int[,] a)
+{
+for (int i = 0; i < a.GetLength(0); i++)
+{
+for (int j = 0; j < a.GetLength(1); j++) Console.Write("{0,3} ", a[i, j]);
+Console.WriteLine();
+}
+    }
+    static void Main(string[] args)
     {
-      int [,] result = new int[size, size];
-      int i = 0;
-      int j = 0;
-      int rowE = size - 1;
-      int columnE = size - 1;
-      int rowS = 0;
-      int columnS = 0;
-      bool left = true;
-      bool top = true;
-      int count = 0;
-      while (count < size * size)
-      {
-        count++;
-        result[i, j] = count;
-        //идем вправо
-        if (left && top)
-        {
-          if (j == columnE)
-          {
-            rowS++;
-            top = true;
-            left = false;
-            i++;
-            continue;
-          }
-          else
-          {
-            j++;
-              continue;
-          }
-        }
-        //идем вниз
-        if (!left && top)
-        {
-          if (i == rowE)
-          {
-            columnE--;
-            top = false;
-            left = false;
-            j--;
-            continue;
-          }
-          else
-          {
-            i++;
-            continue;
-          }
-        }
-        //идем влево
-        if (!left && !top)
-        {
-          if (j == columnS)
-          {
-            rowE--;
-            top = false;
-            left = true;
-            i--;
-            continue;
-          }
-          else
-          {
-            j--;
-            continue;
-      }
+        
+            Console.Write("Введите размерность массива");
+
+            
+            int n = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine();
+
+            int[,] a = new int[n, n];
+
+            int i = 0, j = 0;
+
+            int value = 1;
+
+            while (n != 0)
+            {
+                int k = 0;
+                do { a[i, j++] = value++; } while (++k < n - 1);
+                for (k = 0; k < n - 1; k++) a[i++, j] = value++;
+                for (k = 0; k < n - 1; k++) a[i, j--] = value++;
+                for (k = 0; k < n - 1; k++) a[i--, j] = value++;
+
+                ++i; ++j; n = n < 2 ? 0 : n - 2;
+            }
+
+            DisplayArray(a);
+            Console.WriteLine();
+        
     }
-        //Идем вверх
-       if (left && !top)
-        {
-          if (j == rowS)
-          {
-            columnS++;
-            top = true;
-            left = true;
-            j++;
-            continue;
-          }
-          else
-          {
-            i--;
-            continue; 
-          }
-        }
-      }
-      return result;
-    }
-    void PrintArray(int[,] inArray)
-    {
-      for (int i = 0; i < inArray.GetLength(0); i++)
-      {
-        for (int j = 0; j < inArray.GetLength(1); j++)
-        {
-          Console.WriteLine($"{inArray[i, j]} ");
-        }
-        Console.WriteLine();
-      }
-    }
-  }
 }
